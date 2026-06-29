@@ -39,7 +39,7 @@ export function Section({
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        "glass-panel scroll-mt-24 rounded-3xl border border-border/60 shadow-[0_8px_40px_-16px_rgba(0,0,0,0.45)]",
+        "glass-panel shadow-soft scroll-mt-24 rounded-3xl border border-border/70",
         compact ? "p-5" : "p-6 sm:p-7",
         className
       )}

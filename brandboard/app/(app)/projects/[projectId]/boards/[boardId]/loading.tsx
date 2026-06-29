@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function BoardLoading() {
   return (
-    <div className="flex h-[calc(100vh-4rem)] flex-col">
+    <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-3 sm:px-4">
         <Skeleton className="h-5 w-48" />
         <div className="flex gap-2">

@@ -5,22 +5,21 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  MessageSquare,
   LayoutGrid,
-  LayoutTemplate,
+  FolderOpen,
   Settings,
   PanelLeftClose,
   PanelLeftOpen,
   Plus,
+  LogOut,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { PROJECTS } from "@/lib/mock-data";
 
 const NAV = [
-  { label: "Chats", href: "/new", icon: MessageSquare },
-  { label: "Boards", href: "/projects", icon: LayoutGrid },
-  { label: "Templates", href: "/dashboard#templates", icon: LayoutTemplate },
+  { label: "Boards", href: "/boards", icon: LayoutGrid },
+  { label: "Projects", href: "/projects", icon: FolderOpen },
 ] as const;
 
 const COLLAPSED_W = 76;
@@ -143,7 +142,7 @@ export function HomeSidebar() {
         </div>
       </div>
 
-      {/* Footer: settings + collapse toggle */}
+      {/* Footer: settings + sign out + collapse toggle */}
       <div className="mt-auto flex flex-col gap-1 border-t border-border/50 px-3.5 py-3">
         <NavRow
           href="/settings"
@@ -152,6 +151,19 @@ export function HomeSidebar() {
           active={isActive("/settings")}
           expanded={expanded}
         />
+        <form action="/auth/signout" method="post">
+          <button
+            type="submit"
+            aria-label="Sign out"
+            className={cn(
+              "flex h-10 w-full items-center gap-3 rounded-xl px-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/60 hover:text-foreground",
+              !expanded && "justify-center px-0"
+            )}
+          >
+            <LogOut className="h-[18px] w-[18px] shrink-0" />
+            {expanded && <span className="whitespace-nowrap">Sign out</span>}
+          </button>
+        </form>
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}

@@ -89,7 +89,7 @@ export default async function AuditResultsPage({
       notFound();
     }
     return (
-      <div className="bg-aurora">
+      <div className="flex flex-1 flex-col">
         <AuditGeneratingView
           projectId={projectId}
           jobId={jobId}
@@ -101,7 +101,7 @@ export default async function AuditResultsPage({
 
   if (statusOnly.status === "failed") {
     return (
-      <div className="bg-aurora flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-5 py-12 text-center">
+      <div className="flex flex-1 flex-col items-center justify-center px-5 py-12 text-center">
         <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-destructive/10 text-destructive">
           <AlertTriangle className="h-7 w-7" />
         </span>
@@ -117,7 +117,7 @@ export default async function AuditResultsPage({
             <Link href="/new">Try again</Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href="/dashboard">Back to dashboard</Link>
+            <Link href="/new">Back to home</Link>
           </Button>
         </div>
       </div>
@@ -163,7 +163,7 @@ export default async function AuditResultsPage({
   const promptText = project.input_prompt ?? project.title;
 
   return (
-    <div className="bg-aurora flex h-[calc(100vh-4rem)]">
+    <div className="flex min-h-0 flex-1">
       {/* Left: persistent AI chat panel */}
       <aside className="hidden w-[330px] shrink-0 flex-col border-r border-border/50 bg-card/20 p-4 backdrop-blur-sm lg:flex">
         <WorkspaceChatPanel
@@ -180,7 +180,7 @@ export default async function AuditResultsPage({
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border/50 glass px-4">
           <Button asChild variant="ghost" size="sm" className="-ml-2 gap-1.5">
-            <Link href="/dashboard">
+            <Link href="/projects">
               <ArrowLeft className="h-4 w-4" />
               <span className="hidden sm:inline">Back</span>
             </Link>
@@ -208,7 +208,34 @@ export default async function AuditResultsPage({
 
         <div className="min-h-0 flex-1 overflow-y-auto scrollbar-thin">
           <div className="mx-auto max-w-3xl space-y-5 px-5 py-6 sm:px-6">
-            {/* 1 · Brand Snapshot */}
+            {/* Canvas-first hero — the visual workspace is the destination */}
+            <Section
+              id="moodboard"
+              eyebrow="Workspace"
+              title="Your creative canvas"
+              icon={LayoutGrid}
+            >
+              <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                Jump into the infinite board to arrange references, colors, and
+                type — the audit details below are here whenever you need them.
+              </p>
+              <MoodboardPreview
+                boardHref={boardHref}
+                colors={brandAssets.colors}
+                images={brandAssets.images}
+                fontFamily={brandAssets.fonts[0]?.family ?? null}
+              />
+            </Section>
+
+            {/* Secondary: the audit report */}
+            <div className="flex items-center gap-3 px-1 pt-3">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground/70">
+                Brand audit · details
+              </span>
+              <span className="h-px flex-1 bg-border/70" />
+            </div>
+
+            {/* Brand Snapshot */}
             <Section eyebrow="01 · Snapshot" title="Brand Snapshot" icon={Sparkles}>
               <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
                 {brandAssets.connected && brandAssets.logoUrl ? (
@@ -500,21 +527,6 @@ export default async function AuditResultsPage({
                 )}
               </Section>
             )}
-
-            {/* 9 · Moodboard Preview */}
-            <Section
-              id="moodboard"
-              eyebrow="09 · Canvas"
-              title="Moodboard Preview"
-              icon={LayoutGrid}
-            >
-              <MoodboardPreview
-                boardHref={boardHref}
-                colors={brandAssets.colors}
-                images={brandAssets.images}
-                fontFamily={brandAssets.fonts[0]?.family ?? null}
-              />
-            </Section>
 
             <div className="h-4" />
           </div>

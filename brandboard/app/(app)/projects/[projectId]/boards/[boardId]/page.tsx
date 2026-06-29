@@ -20,7 +20,7 @@ export default async function BoardCanvasPage({
   }
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] flex-col">
+    <div className="flex min-h-0 flex-1 flex-col">
       <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border px-3 sm:px-4">
         <div className="flex min-w-0 items-center gap-2">
           <Button asChild variant="ghost" size="icon" className="shrink-0">

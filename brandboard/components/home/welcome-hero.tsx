@@ -40,11 +40,11 @@ export function WelcomeHero() {
 
       <motion.h1
         variants={item}
-        className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl"
+        className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-[3.25rem] sm:leading-[1.05]"
       >
-        What brand would you like to{" "}
-        <span className="bg-gradient-to-r from-primary to-[hsl(280_70%_68%)] bg-clip-text text-transparent">
-          research today?
+        Describe the brand you{" "}
+        <span className="bg-gradient-to-r from-primary to-[hsl(280_80%_64%)] bg-clip-text text-transparent">
+          want to build.
         </span>
       </motion.h1>
 

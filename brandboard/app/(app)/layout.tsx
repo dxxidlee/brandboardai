@@ -1,8 +1,10 @@
 import { redirect } from "next/navigation";
 
-import { TopBar } from "@/components/layout/top-bar";
-import { AppSidebar } from "@/components/layout/app-sidebar";
 import { createClient } from "@/lib/supabase/server";
+import { HomeSidebar } from "@/components/home/home-sidebar";
+import { MobileNav } from "@/components/layout/mobile-nav";
+import { Logo } from "@/components/layout/logo";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 export default async function AppLayout({
   children,
@@ -19,11 +21,17 @@ export default async function AppLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-background">
-      <AppSidebar />
+    <div className="bg-aurora relative flex min-h-svh">
+      <HomeSidebar />
       <div className="flex min-w-0 flex-1 flex-col">
-        <TopBar user={user} />
-        <main className="flex-1">{children}</main>
+        <header className="flex h-14 items-center gap-2 px-3 lg:hidden">
+          <MobileNav />
+          <Logo showWordmark={false} />
+          <div className="ml-auto">
+            <ThemeToggle />
+          </div>
+        </header>
+        <main className="flex flex-1 flex-col">{children}</main>
       </div>
     </div>
   );

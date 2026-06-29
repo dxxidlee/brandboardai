@@ -14,8 +14,12 @@ import { PROJECTS } from "@/lib/mock-data";
 const FILTERS = ["All", "Audit", "Moodboard"] as const;
 type Filter = (typeof FILTERS)[number];
 
-export function ProjectsExplorer() {
-  const [filter, setFilter] = React.useState<Filter>("All");
+export function ProjectsExplorer({
+  initialFilter = "All",
+}: {
+  initialFilter?: Filter;
+}) {
+  const [filter, setFilter] = React.useState<Filter>(initialFilter);
   const [query, setQuery] = React.useState("");
 
   const filtered = PROJECTS.filter((p) => {

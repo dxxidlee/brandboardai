@@ -43,9 +43,9 @@ export default function GlobalError({
             Try again
           </Button>
           <Button asChild variant="outline" className="gap-1.5">
-            <Link href="/dashboard">
+            <Link href="/new">
               <Home className="h-4 w-4" />
-              Go to dashboard
+              Go home
             </Link>
           </Button>
         </div>

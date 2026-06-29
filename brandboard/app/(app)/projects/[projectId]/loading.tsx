@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AuditLoading() {
   return (
-    <div className="bg-aurora flex h-[calc(100vh-4rem)]">
+    <div className="flex min-h-0 flex-1">
       <aside className="hidden w-[330px] shrink-0 flex-col gap-4 border-r border-border/50 p-4 lg:flex">
         <Skeleton className="h-10 w-2/3 rounded-xl" />
         <Skeleton className="h-24 w-full rounded-2xl" />

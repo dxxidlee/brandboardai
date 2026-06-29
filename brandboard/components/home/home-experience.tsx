@@ -44,7 +44,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 type Phase = "welcome" | "conversation";
 
-export function HomeExperience() {
+export function HomeExperience({ signedOut = false }: { signedOut?: boolean }) {
   const router = useRouter();
   const [phase, setPhase] = React.useState<Phase>("welcome");
   const [prompt, setPrompt] = React.useState("");
@@ -80,6 +80,12 @@ export function HomeExperience() {
   const handleSubmit = React.useCallback(async () => {
     const text = prompt.trim();
     if (!text || busy) return;
+
+    // Signed-out funnel: route to sign in instead of starting an audit.
+    if (signedOut) {
+      router.push("/login");
+      return;
+    }
 
     setBusy(true);
     setError(null);
@@ -122,7 +128,7 @@ export function HomeExperience() {
         `/projects/${data.projectId}?generating=true&jobId=${data.jobId}`
       );
     }
-  }, [prompt, busy, startAudit, router]);
+  }, [prompt, busy, startAudit, router, signedOut]);
 
   const reset = () => {
     setPhase("welcome");
@@ -210,7 +216,7 @@ export function HomeExperience() {
                           Try again
                         </Button>
                         <Button asChild size="sm" variant="outline">
-                          <Link href="/dashboard">Back to dashboard</Link>
+                          <Link href="/new">Back to home</Link>
                         </Button>
                       </div>
                     </motion.div>

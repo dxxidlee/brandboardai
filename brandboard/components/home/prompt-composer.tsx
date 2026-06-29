@@ -55,8 +55,8 @@ export function PromptComposer({
 
   const placeholder =
     examples.length > 0 && !value
-      ? `Ask anything…  e.g. ${examples[placeholderIndex]}`
-      : "Ask anything…";
+      ? `Describe the brand you want to build…  e.g. ${examples[placeholderIndex]}`
+      : "Describe the brand you want to build…";
 
   const canSubmit = value.trim().length > 0 && !disabled;
 
@@ -76,7 +76,7 @@ export function PromptComposer({
     >
       <div
         className={cn(
-          "glass-strong relative rounded-[28px] border p-2.5 shadow-[0_12px_50px_-12px_rgba(0,0,0,0.5)] transition-all duration-300",
+          "glass-strong shadow-soft-lg relative rounded-[28px] border p-2.5 transition-all duration-300",
           focused
             ? "border-primary/40 ring-4 ring-primary/10"
             : "border-border/70"

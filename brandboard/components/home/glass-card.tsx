@@ -22,10 +22,10 @@ export const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
       <motion.div
         ref={ref}
         className={cn(
-          "rounded-3xl border border-border/60 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.45)]",
+          "shadow-soft rounded-3xl border border-border/70",
           variant === "strong" ? "glass-strong" : "glass-panel",
           interactive &&
-            "transition-shadow duration-300 hover:shadow-[0_16px_60px_-12px_rgba(0,0,0,0.55)]",
+            "transition-shadow duration-300 hover:shadow-soft-lg",
           className
         )}
         {...props}

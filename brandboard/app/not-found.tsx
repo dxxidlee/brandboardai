@@ -24,9 +24,9 @@ export default function NotFound() {
         </p>
         <div className="mt-7 flex flex-col items-center justify-center gap-2 sm:flex-row">
           <Button asChild className="gap-1.5">
-            <Link href="/dashboard">
+            <Link href="/new">
               <Compass className="h-4 w-4" />
-              Go to dashboard
+              Go to workspace
             </Link>
           </Button>
           <Button asChild variant="outline" className="gap-1.5">

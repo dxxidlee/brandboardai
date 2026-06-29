@@ -6,7 +6,6 @@ import {
   LayoutGrid,
   Sparkles,
   FolderOpen,
-  Palette,
   Settings,
   Plus,
 } from "lucide-react";
@@ -16,9 +15,8 @@ import { Button } from "@/components/ui/button";
 import { PROJECTS } from "@/lib/mock-data";
 
 const NAV = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutGrid },
+  { label: "Boards", href: "/boards", icon: LayoutGrid },
   { label: "Projects", href: "/projects", icon: FolderOpen },
-  { label: "Templates", href: "/dashboard#templates", icon: Palette },
 ];
 
 export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
@@ -34,7 +32,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         <Button asChild className="w-full justify-start gap-2 shadow-sm">
           <Link href="/new" onClick={onNavigate}>
             <Plus className="h-4 w-4" />
-            New audit
+            New chat
           </Link>
         </Button>
       </div>

@@ -128,7 +128,7 @@ export function AuditGeneratingView({
       </p>
 
       <Button asChild variant="outline" className="mt-4">
-        <Link href="/dashboard">Back to dashboard</Link>
+        <Link href="/new">Back to home</Link>
       </Button>
     </div>
   );
