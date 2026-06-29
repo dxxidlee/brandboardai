@@ -79,6 +79,16 @@ export async function getLatestAuditJob(projectId: string) {
   return data;
 }
 
+export async function getProjectChatMessages(projectId: string) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("chat_messages")
+    .select("id, role, content, created_at")
+    .eq("project_id", projectId)
+    .order("created_at", { ascending: true });
+  return data ?? [];
+}
+
 export async function getProjectStatus(projectId: string) {
   const supabase = await createClient();
   const { data } = await supabase

@@ -275,6 +275,40 @@ export type Database = {
           },
         ];
       };
+      chat_messages: {
+        Row: {
+          id: string;
+          project_id: string;
+          role: "user" | "assistant";
+          content: string;
+          metadata_json: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          project_id: string;
+          role: "user" | "assistant";
+          content: string;
+          metadata_json?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          project_id?: string;
+          role?: "user" | "assistant";
+          content?: string;
+          metadata_json?: Json;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_project_id_fkey";
+            columns: ["project_id"];
+            referencedRelation: "projects";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       jobs: {
         Row: {
           id: string;
@@ -385,3 +419,4 @@ export type Asset = Tables<"assets">;
 export type AuditResult = Tables<"audit_results">;
 export type CanvasItem = Tables<"canvas_items">;
 export type Job = Tables<"jobs">;
+export type ChatMessage = Tables<"chat_messages">;
