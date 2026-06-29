@@ -79,14 +79,48 @@ export async function getLatestAuditJob(projectId: string) {
   return data;
 }
 
-export async function getProjectChatMessages(projectId: string) {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("chat_messages")
-    .select("id, role, content, created_at")
-    .eq("project_id", projectId)
-    .order("created_at", { ascending: true });
-  return data ?? [];
+export type ChatMessageRow = {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  created_at: string;
+};
+
+/**
+ * Loads the persisted chat history for a project. Never throws: if the table is
+ * missing (migration not applied), RLS/grants deny access, or any other error
+ * occurs, it returns an empty history so the project page still renders. The
+ * underlying error is logged in development for debugging.
+ */
+export async function getProjectChatMessages(
+  projectId: string
+): Promise<ChatMessageRow[]> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("chat_messages")
+      .select("id, role, content, created_at")
+      .eq("project_id", projectId)
+      .order("created_at", { ascending: true });
+
+    if (error) {
+      if (process.env.NODE_ENV === "development") {
+        console.error(
+          "[getProjectChatMessages] Failed to load chat history:",
+          error.message,
+          error.code ? `(${error.code})` : ""
+        );
+      }
+      return [];
+    }
+
+    return data ?? [];
+  } catch (err) {
+    if (process.env.NODE_ENV === "development") {
+      console.error("[getProjectChatMessages] Unexpected error:", err);
+    }
+    return [];
+  }
 }
 
 export async function getProjectStatus(projectId: string) {
